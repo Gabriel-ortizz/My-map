@@ -1,3 +1,4 @@
+import NextNProgress from 'nextjs-progressbar';
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 
@@ -9,7 +10,7 @@ function App ({ Component, pageProps}: AppProps) {
 
 
     <Head>
-        <title>My Trips </title>
+        
         <link rel="shortcut icon" href="public/favicon.ico" />   
         <link rel="shortcut icon" href="public/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
@@ -26,6 +27,13 @@ function App ({ Component, pageProps}: AppProps) {
 
         
         <GlobalStyles />
+
+        <NextNProgress 
+        color="hsl(238, 94%, 21%)"
+        startPosition={0.3}
+        stopDelayMs={200}
+        height={3}
+        />
     <Component {...pageProps} />
     
 

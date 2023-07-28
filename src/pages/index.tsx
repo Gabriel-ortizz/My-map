@@ -1,18 +1,21 @@
-import LinkWrapper from 'components/LinkWrapper'
-import dynamic from 'next/dynamic'
-import { InfoOutline, InfoOutlineDimensions} from '@styled-icons/evaicons-outline/InfoOutline'
+import HomeTemplate from "templates/Home";
+import { MapProps } from "components/Map"
+import client from "graphql/client";
+import { GET_PLACES } from "graphql/queries";
+import { GetPlacesQuery } from "graphql/generated/graphql";
 
-const Map = dynamic(() => import ('components/Map'), {ssr: false})
-
-export default function Home() {
-  return(
-    <>
-    <LinkWrapper href='/about'>
-      <InfoOutline size={32} aria-label='About'/>
-    
-    </LinkWrapper>
-    <Map/>
-    </>
-  )
+export default function Home ({places}: MapProps){
+  console.log(places)
+  return <HomeTemplate places={places} />
 }
 
+export const GetStaticProps = async () => {
+  const { places } = await client.request<GetPlacesQuery>(GET_PLACES)
+console.log(places)
+  return{
+    revalidate: 5,
+    props: {
+      places
+    }
+  }
+}
