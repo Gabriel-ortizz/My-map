@@ -9,9 +9,9 @@ export default function Home ({places}: MapProps){
   return <HomeTemplate places={places} />
 }
 
-export const GetStaticProps = async () => {
+export const getStaticProps = async () => {
   const { places } = await client.request<GetPlacesQuery>(GET_PLACES)
-console.log(places)
+  console.log(places)
   return{
     revalidate: 5,
     props: {
